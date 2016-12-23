@@ -1,3 +1,3 @@
 # Nativescript experiment
 
-A repo to learn the basics of nativescript.
+A repo to learn the basics of nativescript on Android.
