@@ -1,32 +1,31 @@
-var dialogsModule = require("ui/dialogs");
-var frameModule = require("ui/frame");
+const dialogsModule = require('ui/dialogs');
+const frameModule = require('ui/frame');
 
-var UserViewModel = require("../../shared/view-models/user-view-model");
-var user = new UserViewModel();
+const UserViewModel = require('../../shared/view-models/user-view-model');
+const user = new UserViewModel();
 
-exports.loaded = function(args) {
-    var page = args.object;
+exports.loaded = (args) => {
+    const page = args.object;
+
     page.bindingContext = user;
 };
 
 function completeRegistration() {
     user.register()
-        .then(function() {
+        .then(() => {
             dialogsModule
-                .alert("Your account was successfully created.")
-                .then(function() {
-                    frameModule.topmost().navigate("views/login/login");
-                });
-        }).catch(function(error) {
-            console.log(error);
+                .alert('Your account was successfully created.')
+                .then(() => frameModule.topmost().navigate('views/login/login'));
+        })
+        .catch((error) => {
+            console.log(JSON.stringify(error));
+
             dialogsModule
                 .alert({
-                    message: "Unfortunately we were unable to create your account.",
-                    okButtonText: "OK"
+                    'message': 'Cannot register. ', // + error._bodyText.message,
+                    'okButtonText': 'OK'
                 });
         });
 }
 
-exports.register = function() {
-    completeRegistration();
-};
+exports.register = () => completeRegistration();
