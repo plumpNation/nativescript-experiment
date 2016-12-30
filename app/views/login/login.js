@@ -1,11 +1,21 @@
 const frameModule = require('ui/frame');
+const UserViewModel = require("../../shared/view-models/user-view-model");
 
-exports.onLoad = function () {
-    console.log('page loaded');
+const user = new UserViewModel();
+
+let page;
+let email;
+
+exports.loaded = function (args) {
+    // grab an instance of the view; nativescript passes the view to the loaded
+    // event handler.
+    page = args.object;
+
+    page.bindingContext = user;
 };
 
 exports.signIn = function () {
-    //
+    user.login();
 };
 
 exports.register = function() {

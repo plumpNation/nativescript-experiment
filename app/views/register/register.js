@@ -18,11 +18,11 @@ function completeRegistration() {
                 .then(() => frameModule.topmost().navigate('views/login/login'));
         })
         .catch((error) => {
-            console.log(JSON.stringify(error));
+            const errorDetails = JSON.parse(error._bodyText);
 
             dialogsModule
                 .alert({
-                    'message': 'Cannot register. ', // + error._bodyText.message,
+                    'message': 'Cannot register. '  + errorDetails.message,
                     'okButtonText': 'OK'
                 });
         });
